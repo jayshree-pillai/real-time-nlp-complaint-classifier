@@ -74,5 +74,5 @@ Output:
 
 ## 👤 Author
 
-Jayshree Pillia – Machine Learning Engineer  
+Jayshree Pillai – Machine Learning Engineer  
 > 📌 Lambda handler + streaming setup will be added in upcoming commit.

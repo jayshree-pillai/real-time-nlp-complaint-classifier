@@ -74,7 +74,5 @@ Output:
 
 ## 👤 Author
 
-Jay – Machine Learning Engineer  
-[MLOps Portfolio | Coming July 2025]
-
+Jayshree Pillia – Machine Learning Engineer  
 > 📌 Lambda handler + streaming setup will be added in upcoming commit.

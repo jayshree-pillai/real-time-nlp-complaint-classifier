@@ -34,7 +34,26 @@ Classifies consumer complaints in real-time using a BERT-based NLP pipeline depl
 - `model.tar.gz` – Final deployable archive
 
 ---
+### 📊 NLP Model Evaluation (DistilBERT + Logistic Regression)
 
+- Evaluated on 32,484 real-world consumer complaint narratives
+- Encoder: DistilBERT (mean pooled, frozen)
+- Classifier: Logistic Regression
+- Per-record identification and audit loop implemented
+- Retraining pipeline is already in place
+
+**Metrics (No Fine-Tuning):**
+- Precision: 45.1%
+- Recall: 52.2%
+- F1 Score: 40.8%
+- Avg Inference Latency: 0.0088 sec per transaction (batchless, GPU)
+
+This baseline reflects the limitations of a frozen transformer + linear classifier approach.  
+Real-time infra is pre-wired but gated behind accuracy thresholds.  
+**Next step:** upgrade classifier from Logistic Regression to XGBoost or shallow MLP to improve semantic discrimination and reduce class imbalance effects.
+
+
+---
 ## 🧪 Sample Inference
 
 ```bash
@@ -75,4 +94,3 @@ Output:
 ## 👤 Author
 
 Jayshree Pillai – Machine Learning Engineer  
-> 📌 Lambda handler + streaming setup will be added in upcoming commit.

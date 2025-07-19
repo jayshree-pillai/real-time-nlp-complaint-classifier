@@ -1,10 +1,11 @@
-# Real-Time NLP Complaint Classifier
+# 🧠 Real-Time NLP Complaint Classifier
 
-A production-grade multi-class complaint classification system built using DistilBERT + custom classifier head, fine-tuned end-to-end for imbalanced classes in financial complaints.
-Trained on 129K real-world complaints with a 32K validation set, deployed with full audit logging, and designed for real-time inference.
+A production-grade **multi-class complaint classification system** built using **DistilBERT + custom classification head**, fine-tuned end-to-end for imbalanced classes in financial complaints.  
+Trained on **129K real-world complaints** with a **32K validation set**, deployed with full audit logging, and built for real-time inference using AWS infrastructure.
+
 ---
 
-## Problem Statement 
+## 🚨 Problem Statement
 
 Given a customer complaint, predict which of the following categories it belongs to:
 - Credit Reporting
@@ -12,35 +13,40 @@ Given a customer complaint, predict which of the following categories it belongs
 - Mortgages/Loans
 - Credit Card
 - Retail Banking
-The challenge: imbalanced classes, semantic overlap, and high precision requirements for downstream routing.
+
+Challenges include:
+- **Severe class imbalance**
+- **Semantic overlap across labels**
+- **Precision-critical downstream usage**
 
 ---
 
-## Overview
+## ⚙️ Project Overview
 
-- Model: DistilBERT fine-tuned on 129K complaints with a custom classification head (PyTorch)
-- Serving: Deployed to AWS SageMaker (script mode, real-time endpoint)
-- Inference Logic: Lambda (Python 3.9) pulls from Kinesis, calls model, formats prediction
-- Streaming: AWS Kinesis triggers Lambda on new complaint ingestion
-- Logging: Predictions logged to AWS S3 (CSV format) for retraining, auditing, and Agentify integration
-- Retraining Hooks: S3-stored predictions + labels support scheduled retraining pipelines
-- Latency: End-to-end pipeline completes in under 2 seconds from ingestion to classification
+- **Model**: DistilBERT fine-tuned with a PyTorch-based custom classification head
+- **Serving**: Real-time endpoint deployed via AWS SageMaker (script mode)
+- **Inference Logic**: AWS Lambda (Python 3.9) triggered via Kinesis
+- **Streaming**: New complaints flow through AWS Kinesis → Lambda → SageMaker
+- **Logging**: Predictions stored in S3 (CSV format) for audit and retraining
+- **Retraining Hooks**: Supports S3-based retraining loop with Agentify integration
+- **Latency**: End-to-end classification in **<2 seconds**
 
 ---
 
-## Tech Stack
+## 🧰 Tech Stack
 
-- AWS SageMaker (PyTorch script mode endpoint)
-- AWS Lambda (Python 3.9)
+- AWS SageMaker (real-time endpoint, PyTorch script mode)
 - AWS Kinesis Data Stream
+- AWS Lambda (Python 3.9)
 - AWS S3 (CSV-based prediction logging)
-- HuggingFace Transformers (DistilBERT, custom classification head)
-- Scikit-learn (evaluation, metrics)
+- HuggingFace Transformers (DistilBERT + Trainer)
+- Scikit-learn (metrics & eval)
 - Joblib (model serialization)
 
 ---
 
-## NLP Model Evaluation (DistilBERT + Logistic Regression)
+
+## NLP Model Evaluation 
 
 This classifier was trained on 129K labeled complaints, tested on a 32K holdout set, and evaluated on a 5-class imbalanced classification task using a custom DistilBERT classification head.
 
@@ -70,7 +76,8 @@ Baseline Comparison (Frozen DistilBERT + Logistic Regression)
 - Precision: 45.1%
 - Recall: 52.2%
 - F1 Score: 40.8%
-Key Issues:
+
+**Key Issues:**
 - Severe underperformance on minority classes
 - No task-specific adaptation
 - Overfit to dominant label (Credit Reporting)
@@ -82,6 +89,16 @@ Key Issues:
 ```
 
 real-time-nlp-complaint-classifier/
+├── notebooks/
+│   ├── 01_data_split_and_embed.ipynb              # Tokenization and CLS vector extraction
+│   ├── 02_model_train_distilbert_logreg.ipynb     # Baseline: frozen DistilBERT + Logistic Regression
+│   ├── 03_model_finetune_distilbert.ipynb         # End-to-end fine-tuning of DistilBERT
+│   ├── 04_model_log_agentify.ipynb                # Log predictions for Agentify integration
+│   ├── 05_model_deploy_sagemaker.ipynb            # Deploy fine-tuned model to SageMaker endpoint
+│   ├── 06_model_retrain_agent_loop.ipynb          # Simulated retraining loop using prediction logs
+│   ├── 07_real_time_complaint_inference_pipeline.ipynb  # Real-time simulation: ingest → predict → log
+│   ├── 99_utils_explore.ipynb                     # Ad hoc tools and utility functions
+│   ├── evaluate_nlp_metrics.ipynb                 # Final evaluation: precision, recall, F1 (with confusion matrix)│
 ├── data/
 │   ├── complaints_train.csv
 │   └── complaints_test.csv

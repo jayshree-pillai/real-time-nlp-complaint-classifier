@@ -1,7 +1,7 @@
 # 🧠 Real-Time NLP Complaint Classifier
 
 A production-grade **multi-class complaint classification system** built using **DistilBERT + custom classification head**, fine-tuned end-to-end for imbalanced classes in financial complaints.  
-Trained on **129K real-world complaints** with a **32K validation set**, deployed with full audit logging, and built for real-time inference using AWS infrastructure.
+Trained on **129K real-world complaints** with a **32K validation set**, deployed with full audit logging, and real-time inference using AWS infrastructure— containerized, deployed to SageMaker, and built with production-ready retraining hooks.
 
 ---
 

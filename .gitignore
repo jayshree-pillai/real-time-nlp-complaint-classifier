@@ -7,3 +7,15 @@ complaints_processed.csv
 tmp/
 .ipynb_checkpoints/
 
+####- steps to run after changing docker or inference.py
+
+docker build -t distilbert-sagemaker .
+docker tag distilbert-sagemaker:latest 869935087425.dkr.ecr.us-east-1.amazonaws.com/distilbert-sagemaker:latest
+docker push 869935087425.dkr.ecr.us-east-1.amazonaws.com/distilbert-sagemaker:latest
+docker run -it \
+-p 8080:8080 \
+-v /home/ec2-user/SageMaker/complaint-classifier/models/best_model:/opt/ml/model \
+distilbert-sagemaker
+
+
+curl -X POST http://127.0.0.1:8080/invocations -H "Content-Type: application/json" -d '{"inputs": ["This bank has the worst customer service."]}'

@@ -5,6 +5,13 @@ Trained on **129K real-world complaints** with a **32K validation set**, deploye
 
 ---
 
+## 🎬 Demo
+
+▶️ [Watch 3-min Video Demo](https://hatketech-demos.s3.amazonaws.com/distilbert-demo.mp4)  
+*End-to-end pipeline with DistilBERT fine-tuning, Dockerized Flask API, and SageMaker deployment.*
+
+---
+
 ## 🚨 Problem Statement
 
 Given a customer complaint, predict which of the following categories it belongs to:
@@ -42,6 +49,8 @@ Challenges include:
 - HuggingFace Transformers (DistilBERT + Trainer)
 - Scikit-learn (metrics & eval)
 - Joblib (model serialization)
+- Docker (custom image for model + tokenizer)
+- Flask API (containerized and deployed via SageMaker)
 
 ---
 
@@ -119,3 +128,14 @@ real-time-nlp-complaint-classifier/
 ## Author
 
 Jayshree Pillai – Machine Learning Engineer  
+📫 [LinkedIn](https://linkedin.com/in/jspillai)
+
+---
+
+## 🧩 Next Steps
+
+- Migrate to FastAPI + gunicorn
+- CI/CD integration for automated deployment
+- Inference monitoring with Prometheus/Grafana
+
+---
